@@ -34,10 +34,9 @@ public class Command_Invoker : MonoBehaviour
         {
             var command = UndoStack.Pop();
             command?.Undo();
-            
+        
             // Undo yapılan komutu CommandHistory'den kaldırıyoruz
             var commandIndex = CommandHistory.LastIndexOf(command);
-
             if (commandIndex >= 0)
 
             {
@@ -49,7 +48,6 @@ public class Command_Invoker : MonoBehaviour
     public void StartReplay(Transform targetTransform, Vector3 startPosition)
     {
         StartCoroutine(ReplayRoutine(targetTransform, startPosition));
-
     }
 
     private IEnumerator ReplayRoutine(Transform targetTransform, Vector3 startPosition)
@@ -62,7 +60,8 @@ public class Command_Invoker : MonoBehaviour
             yield return new WaitForSeconds(0.3f);
         }
 
-
+        // Replay tamamlandıktan sonra CommandHistory'yi temizle
+        CommandHistory.Clear();
     }
 
 }
