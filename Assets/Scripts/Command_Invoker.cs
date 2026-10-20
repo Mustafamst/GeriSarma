@@ -62,8 +62,7 @@ public class Command_Invoker : MonoBehaviour
             yield return new WaitForSeconds(0.3f);
         }
 
-        // Replay tamamlandıktan sonra CommandHistory'yi temizle
-        CommandHistory.Clear();
+
     }
 
 }
