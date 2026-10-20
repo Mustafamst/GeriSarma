@@ -34,10 +34,12 @@ public class Command_Invoker : MonoBehaviour
         {
             var command = UndoStack.Pop();
             command?.Undo();
-
+            
             // Undo yapılan komutu CommandHistory'den kaldırıyoruz
             var commandIndex = CommandHistory.LastIndexOf(command);
+
             if (commandIndex >= 0)
+
             {
                 CommandHistory.RemoveAt(commandIndex);
             }
@@ -53,11 +55,11 @@ public class Command_Invoker : MonoBehaviour
     private IEnumerator ReplayRoutine(Transform targetTransform, Vector3 startPosition)
     {   
         targetTransform.position = startPosition;
-        yield return new WaitForSeconds(.5f); // Wait for a moment before starting the replay
+        yield return new WaitForSeconds(.5f);
         foreach (ICommand command in CommandHistory)
         {
             command?.Execute();
-            yield return new WaitForSeconds(0.3f); // Adjust the delay as needed
+            yield return new WaitForSeconds(0.3f);
         }
 
         // Replay tamamlandıktan sonra CommandHistory'yi temizle
